@@ -1,0 +1,12 @@
+{
+  "name": "hexo-encrypt",
+  "version": "0.1.0",
+  "description": "encrypt pages",
+  "main": "index",
+  "dependencies": {
+	"crypto-js": "^3.1.6",
+	"hexo-fs": "^0.1.5",
+	"hexo-log": "^0.1.2"
+  },
+  "homepage": "http://edolphin.site/"
+}
