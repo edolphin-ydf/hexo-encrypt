@@ -2,6 +2,9 @@
 	If you want to make an permission with one post, (eg:enter an password to view the content)
 then this hexo plugin is for you.
 
+## test page
+	http://edolphin.site/2016/05/31/encrypt-test/
+	password is 123456
 ## install
 ```
 npm install hexo-encrypt
