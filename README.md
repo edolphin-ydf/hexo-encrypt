@@ -1,17 +1,18 @@
 ## description
-	If you want to make an permission with one post, (eg:enter an password to view the content)
+	If you want to make a permission for one post, (eg:enter an password to view the content)
 then this hexo plugin is for you.
 
 ## test page
 	http://edolphin.site/2016/05/31/encrypt-test/
 	password is 123456
+
 ## install
 ```
 npm install hexo-encrypt
 ```
 in hexo root dir, edit the package.json, add the follow code in dependencies scope
 ```
-"hexo-encrypt": "^0.1.0",
+"hexo-encrypt": "^0.2.0",
 ```
 
 ## features
@@ -20,21 +21,21 @@ in hexo root dir, edit the package.json, add the follow code in dependencies sco
 
 ## usage
 ### config encrypt password
-in _config.yml add the follow code, NOTICE, all option is optional, this means you can discard all the options if you don't want use this features
+in _config.yml add the follow code, NOTE, all option is optional, this means you can discard all the options if you don't want use this features
 ```
 # encrypt
 encrypt:
-  pwdfile: encrypt_password		# this store the password in a file, the whole content of this file will be regard as the password
-    #password: 123456 # this set the password here
+  pwdfile: encrypt_password		# this store the password in a file, the whole content of this file will be regarded as the password
+    #password: 123456 # this set password here
   replace_all_url: true # this will replace img url in all posts
-  base_url: http://you img base url/	# this will connect with you img url in you post, except full url
-  qiniu_ak: you qiniu access key 
-  qiniu_sk: you qiniu secrect key 
+  base_url: http://you img base url/	# this will connect with you img url in you post, except full url(start with http://)
+  qiniu_ak: your qiniu access key 
+  qiniu_sk: your qiniu secrect key 
 
 ```
 
 ### config post
-add the following code in the header of the post to indicate that this post's content should be encrypted. NOTICE, all option is optional, this means you can discard all the options if you don't want use this features
+add the following code in the header of the post to indicate that this post's content should be encrypted. NOTE, all option is optional, this means you can discard all the options if you don't want use this features
 
 ```
 encrypt: true
