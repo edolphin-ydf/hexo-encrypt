@@ -3,7 +3,7 @@
 then this hexo plugin is for you.
 
 ## test page
-	[http://edolphin.site/2016/05/31/encrypt-test/](http://edolphin.site/2016/05/31/encrypt-test/)
+	http://edolphin.site/2016/05/31/encrypt-test/
 	password is 123456
 ## install
 ```
