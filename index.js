@@ -39,10 +39,14 @@ function genUrl(url) {
 
 	qiniu.conf.ACCESS_KEY = hexo.config.encrypt.qiniu_ak.toString();
 	qiniu.conf.SECRET_KEY = hexo.config.encrypt.qiniu_sk.toString();
+	var ttl = 3600;
+	if (hexo.config.encrypt.img_url_ttl != undefined) {
+		ttl = hexo.config.encrypt.img_url_ttl;
+	}
 
 
 	//构建私有空间的链接
-	var policy = new qiniu.rs.GetPolicy();
+	var policy = new qiniu.rs.GetPolicy(ttl);
 
 	//生成下载链接url
 	var downloadUrl = policy.makeRequest(url);

@@ -31,6 +31,7 @@ encrypt:
   base_url: http://you img base url/	# this will connect with you img url in you post, except full url(start with http://)
   qiniu_ak: your qiniu access key 
   qiniu_sk: your qiniu secrect key 
+  img_url_ttl: 3600  # 3600 second, the ttl for qiniu img url
 
 ```
 
