@@ -18,6 +18,7 @@ in hexo root dir, edit the package.json, add the follow code in dependencies sco
 ## features
 - encrypt one post content with AES
 - use qiniu *private* space as you img repository(if you want use this feature, you should get an qiniu account first, search google for help)
+- encode a local img into base64 type, then inline it in html
 
 ## usage
 ### config encrypt password
@@ -32,6 +33,7 @@ encrypt:
   qiniu_ak: your qiniu access key 
   qiniu_sk: your qiniu secrect key 
   img_url_ttl: 3600  # 3600 second, the ttl for qiniu img url
+  type: qiniu # or base64, if base64, the base_url, qiniu_ak, qiniu_sk and img_url_ttl is unnecessary
 
 ```
 
@@ -42,6 +44,7 @@ add the following code in the header of the post to indicate that this post's co
 encrypt: true
 enc_replace_url: true # this indicate wether the plugin should replace the img url in this post, this option has a higher priority than `replace_all_url` in _config.yml
 enc_pwd: 123456 # this is the way to set encrypt password for this post
+enc_img_type: qiniu # or base64
 ```
 
 then run `hexo g` and `hexo s`, open the encrypted post, 
