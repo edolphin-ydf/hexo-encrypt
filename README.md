@@ -81,12 +81,14 @@ in post header
 
 - in _config.yml, config type
 - or in post header, config enc_img_type
-- or in ![](type://), make the url start with type://
+- or in `![](type://)`, make the url start with type://
 
 the value of type could be `qiniu` or `base64` only
 
 ## the priority is:
+```
 ![](type://) > post header > _config.yml
+```
 
 
 if you never config the type in anywhere, then qiniu is default
