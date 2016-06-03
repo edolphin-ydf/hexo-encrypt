@@ -49,6 +49,8 @@ you will find that, the page request you to enter a password.
 
 
 ---
+---
+---
 
 #the config rul detail
 
@@ -75,8 +77,7 @@ in post header
 		you could config replace_all_url: true in _config.yml
 		or config enc_replace_url: true in post which need encode(replace) the url
 
-## for now, the generator support qiniu which the img stored in qiniu cloud and base64 which
-encode the img to base64 and make it inline in html
+## for now, the generator support qiniu which the img stored in qiniu cloud and base64 which encode the img to base64 and make it inline in html
 
 - in _config.yml, config type
 - or in post header, config enc_img_type
