@@ -47,3 +47,69 @@ enc_pwd: 123456 # this is the way to set encrypt password for this post
 then run `hexo g` and `hexo s`, open the encrypted post, 
 you will find that, the page request you to enter a password.
 
+
+---
+the config rul detail
+
+ # the base rule
+ configs for this plugin in _config.yml are all in encrypt: scope
+ eg: 
+ encrypt:
+ 		pwdfile: xxx
+ 		type: xxx
+ 
+ # rule for encrypt content
+ ## config whether encrypt a content
+ in post header
+ 	encrypt: true
+ 
+ ## config the password
+ - store the password in a file, config as pwdfile: finename
+ - config the password in _config.yml directly, password: passwd
+ - config the password for one post,  enc_pwd: 123456
+ 
+ # rule for generate img url
+ 
+ ## first and foremost you should open the switch
+ 		you could config replace_all_url: true in _config.yml
+ 		or config enc_replace_url: true in post which need encode(replace) the url
+ 
+ ## for now, the generator support qiniu which the img stored in qiniu cloud and base64 which
+ encode the img to base64 and make it inline in html
+ 
+ - in _config.yml, config type
+ - or in post header, config enc_img_type
+ - or in ![](type://), make the url start with type://
+ 
+ the value of type could be `qiniu` or `base64` only
+ 
+ ## the priority is:
+ ![](type://) > post header > _config.yml
+ 
+ 
+ if you never config the type in anywhere, then qiniu is default
+ 
+ ## base64:
+ the url rule:(or you can call it path)
+ the path support three types:
+ ~/, / and ./
+ the ~/ will be replaced to / type
+ the ./ will be replaced to / type with base_dir which is the post asset path(data.asset_dir)
+ 
+ ## qiniu:
+ 
+ ### key
+ the qiniu need access key and secrect key first.
+ then config it as qiniu_ak: qiniu_sk: in _config.yml
+ - you can also config a ttl in seconds for the generated img url, which default value is 1 hour
+  	this means if you don't config it, the img which stored in qiuniu  will not be available after
+  	one hour later.
+ 
+ ### base_url rule:
+ the base_url is only support for qiniu
+ so, if the url encode type is qiniu and url is not a full path
+ then connect the base_url and the url
+ otherwise ignore the base_url
+
+
+
