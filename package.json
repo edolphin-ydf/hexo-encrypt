@@ -1,6 +1,6 @@
 {
   "name": "hexo-encrypt",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "encrypt pages",
   "main": "index",
   "dependencies": {
