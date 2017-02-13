@@ -15,17 +15,17 @@
     "type": "git",
     "url": "git+https://github.com/edolphin-ydf/hexo-encrypt.git"
   },
-  "author": {
-    "name": "edolphin"
-  },
+  "author": "edolphin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/edolphin-ydf/hexo-encrypt/issues"
   },
-  "gitHead": "2658c95a87de336482ee6ee5b012fc1c58df31e1",
-  "readme": "ERROR: No README data found!",
-  "_id": "hexo-encrypt@0.1.0",
   "scripts": {},
   "_shasum": "1029bcfb2fd8b0500ef7bcff979183fea6e89cd4",
-  "_from": "hexo-encrypt@>=0.1.0 <0.2.0"
+  "_from": "hexo-encrypt@>=0.1.0 <0.2.0",
+  "keywords": [
+    "hexo",
+    "encrypt",
+    "private"
+  ]
 }
