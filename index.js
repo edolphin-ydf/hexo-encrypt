@@ -72,7 +72,7 @@ var log = require('hexo-log')({
   silent: false
 });
 
-var ConfGlobal = require('./lib/conf_global')(hexo.config.encrypt);
+var ConfGlobal = require('./lib/conf_global')(hexo.config.encrypt, hexo.base_dir);
 var ConfPost = require('./lib/conf_post');
 var ConfUrl = require('./lib/conf_url');
 var imgUrlGenerator = require('./lib/url_gen');
@@ -96,20 +96,24 @@ function encrypt(conf, data) {
 	var password = conf.password;
 	var ciphertext = CryptoJS.AES.encrypt(data.content, password);
 	var txt = ciphertext.toString();
-	data.content = '<div id="enc_content">' + txt + '</div>';
-	data.content = data.content + '<script src="/js/crypto-js.js"></script>';
+	data.content = '<script src="/js/crypto-js.js"></script>';
 	data.content = data.content + '<script>'+
-		'var pwd = window.prompt("please input password","");' + 
-		'var txt = document.getElementById("enc_content").innerHTML;' +
-		'var bytes  = CryptoJS.AES.decrypt(txt, pwd);' +
-		'var plaintext = bytes.toString(CryptoJS.enc.Utf8);' +
-		'document.getElementById("enc_content").innerHTML = plaintext' +
+		'function doDecrypt(pwd) {' +
+		'	console.log("in doDecrypt");' +
+		'	var txt = document.getElementById("enc_content").innerHTML;' +
+		'	var bytes  = CryptoJS.AES.decrypt(txt, pwd);' +
+		'	var plaintext = bytes.toString(CryptoJS.enc.Utf8);' +
+		'	document.getElementById("enc_content").innerHTML = plaintext;' +
+		'	document.getElementById("enc_content").style.display = "block";' +
+		'   document.getElementById("enc_passwd").style.display = "none";' +
+		'}' +
 		'</script>';
+	data.content = data.content + '<div id="enc_content" style="display:none">' + txt + '</div>';
+	data.content = data.content + '<div id="enc_passwd">' + conf.template + '</div>';
 	log.info(data.title + " encryped");
 }
 
 hexo.extend.filter.register('after_post_render', function(data){
-
 	var confPost = ConfPost.create(ConfGlobal, data);
 	log.debug("replace:" + confPost.replace_img_url);
 	if (confPost.replace_img_url == true) {
