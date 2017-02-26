@@ -72,7 +72,7 @@ var log = require('hexo-log')({
   silent: false
 });
 
-var RootUrl = hexo.config.root
+var RootUrl = hexo.config.root;
 var ConfGlobal = require('./lib/conf_global')(hexo.config.encrypt, hexo.base_dir);
 var ConfPost = require('./lib/conf_post');
 var ConfUrl = require('./lib/conf_url');
@@ -97,7 +97,7 @@ function encrypt(conf, data) {
 	var password = conf.password;
 	var ciphertext = CryptoJS.AES.encrypt(data.content, password);
 	var txt = ciphertext.toString();
-	var CryptoJSurl = RootUrl+'js/crypto-js.js'
+	var CryptoJSurl = RootUrl+'js/crypto-js.js';
 	data.content = '<script src=' + CryptoJSurl + '></script>';
 	data.content = data.content + '<script>'+
 		'function doDecrypt(pwd) {' +
