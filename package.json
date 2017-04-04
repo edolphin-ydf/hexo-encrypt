@@ -2,25 +2,24 @@
   "_args": [
     [
       {
-        "raw": "hexo-encrypt@0.5.1",
+        "raw": "hexo-encrypt@0.5.2",
         "scope": null,
         "escapedName": "hexo-encrypt",
         "name": "hexo-encrypt",
-        "rawSpec": "0.5.1",
-        "spec": "0.5.1",
+        "rawSpec": "0.5.2",
+        "spec": "0.5.2",
         "type": "version"
       },
       "/Users/edolphin/Documents/blog/edolphin-blog"
     ]
   ],
-  "_from": "hexo-encrypt@0.5.1",
-  "_id": "hexo-encrypt@0.5.1",
+  "_from": "hexo-encrypt@0.5.2",
   "_inCache": true,
   "_location": "/hexo-encrypt",
   "_nodeVersion": "6.3.1",
   "_npmOperationalInternal": {
     "host": "packages-18-east.internal.npmjs.com",
-    "tmp": "tmp/hexo-encrypt-0.5.1.tgz_1486969843239_0.1894909981638193"
+    "tmp": "tmp/hexo-encrypt-0.5.2.tgz_1486969843239_0.1894909981638193"
   },
   "_npmUser": {
     "name": "edolphin",
@@ -36,26 +35,24 @@
     "graceful-fs": "4.1.11"
   },
   "_requested": {
-    "raw": "hexo-encrypt@0.5.1",
+    "raw": "hexo-encrypt@0.5.2",
     "scope": null,
     "escapedName": "hexo-encrypt",
     "name": "hexo-encrypt",
-    "rawSpec": "0.5.1",
-    "spec": "0.5.1",
+    "rawSpec": "0.5.2",
+    "spec": "0.5.2",
     "type": "version"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "https://registry.npmjs.org/hexo-encrypt/-/hexo-encrypt-0.5.1.tgz",
+  "_resolved": "https://registry.npmjs.org/hexo-encrypt/-/hexo-encrypt-0.5.2.tgz",
   "_shasum": "95630cd668a30e43f0110e12d60fc572ee77201a",
   "_shrinkwrap": null,
-  "_spec": "hexo-encrypt@0.5.1",
+  "_spec": "hexo-encrypt@0.5.2",
   "_where": "/Users/edolphin/Documents/blog/edolphin-blog",
-  "author": {
-    "name": "edolphin"
-  },
+  "author": "edolphin",
   "bugs": {
     "url": "https://github.com/edolphin-ydf/hexo-encrypt/issues"
   },
@@ -70,9 +67,8 @@
   "directories": {},
   "dist": {
     "shasum": "95630cd668a30e43f0110e12d60fc572ee77201a",
-    "tarball": "https://registry.npmjs.org/hexo-encrypt/-/hexo-encrypt-0.5.1.tgz"
+    "tarball": "https://registry.npmjs.org/hexo-encrypt/-/hexo-encrypt-0.5.2.tgz"
   },
-  "gitHead": "2d4bb5d0f048d3546ca65b14aaffc5ef098a2261",
   "homepage": "http://edolphin.site/",
   "keywords": [
     "hexo",
@@ -82,18 +78,14 @@
   "license": "ISC",
   "main": "index",
   "maintainers": [
-    {
-      "name": "edolphin",
-      "email": "shisanbihua@126.com"
-    }
+    "edolphin <shisanbihua@126.com>"
   ],
   "name": "hexo-encrypt",
   "optionalDependencies": {},
-  "readme": "ERROR: No README data found!",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/edolphin-ydf/hexo-encrypt.git"
   },
   "scripts": {},
-  "version": "0.5.1"
+  "version": "0.5.2"
 }
