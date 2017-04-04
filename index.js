@@ -99,17 +99,23 @@ function encrypt(conf, data) {
 	var txt = ciphertext.toString();
 	var CryptoJSurl = RootUrl+'js/crypto-js.js';
 	data.content = '<script src=' + CryptoJSurl + '></script>';
-	data.content = data.content + '<script>'+
-		'function doDecrypt(pwd) {' +
-		'	console.log("in doDecrypt");' +
-		'	var txt = document.getElementById("enc_content").innerHTML;' +
-		'	var bytes  = CryptoJS.AES.decrypt(txt, pwd);' +
-		'	var plaintext = bytes.toString(CryptoJS.enc.Utf8);' +
-		'	document.getElementById("enc_content").innerHTML = plaintext;' +
-		'	document.getElementById("enc_content").style.display = "block";' +
-		'   document.getElementById("enc_passwd").style.display = "none";' +
-		'}' +
-		'</script>';
+	data.content = data.content + '<script>\n'+
+		'function doDecrypt(pwd, onError) {\n' +
+		'	console.log("in doDecrypt");\n' +
+		'	var txt = document.getElementById("enc_content").innerHTML;\n' +
+		'	var plantext;\n'	+ 
+		'	try {\n' +
+		'	  	var bytes = CryptoJS.AES.decrypt(txt, pwd);\n' +
+		'		plaintext = bytes.toString(CryptoJS.enc.Utf8);\n' +
+		'	} catch(err) {\n'	+
+		'		if(onError) {onError(err);}\n'	+
+		'		return;\n'	+
+		'	}\n'	+
+		'	document.getElementById("enc_content").innerHTML = plaintext;\n' +
+		'	document.getElementById("enc_content").style.display = "block";\n' +
+		'   document.getElementById("enc_passwd").style.display = "none";\n' +
+		'}\n' +
+		'</script>\n';
 	data.content = data.content + '<div id="enc_content" style="display:none">' + txt + '</div>';
 	data.content = data.content + '<div id="enc_passwd">' + conf.template + '</div>';
 	log.info(data.title + " encryped");
