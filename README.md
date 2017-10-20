@@ -44,7 +44,7 @@ for template, the next is an example:
 			  <div id="enc_error" style=" display: inline-block; color: #d84527; font: large; "></div>
                <script> 
 				var onError = function(error) { 
-					$("#enc_error")[0].innerHTML = "password error!"; 
+e					$("#enc_error")[0].innerHTML = "password error!"; 
 				}; 
                 function decrypt() { 
                     var passwd = $("#enc_passwd input")[0].value; 
@@ -73,7 +73,7 @@ you will find that, the page request you to enter a password.
 ---
 ---
 
-# the config rul detail
+# the config rule detail
 
 # the base rule
 configs for this plugin in _config.yml are all in encrypt: scope
