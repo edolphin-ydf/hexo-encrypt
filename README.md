@@ -42,7 +42,7 @@ for template, the next is an example:
   template: ' <input type="text" style=" border-radius: 5px; border-style: groove; height: 30px; width: 50%; cursor: auto; font-size: 102%; color: currentColor; outline: none; text-overflow: initial; padding-left: 5px;">  
               <input type="submit" value="decrypt" onclick="decrypt()" style=" width: 58px; height: 34px; border-radius: 5px; background-color: white; border-style: solid; color: currentColor; "> 
 			  <div id="enc_error" style=" display: inline-block; color: #d84527; font: large; "></div>
-              <script> 
+               <script> 
 				var onError = function(error) { 
 					$("#enc_error")[0].innerHTML = "password error!"; 
 				}; 
@@ -73,7 +73,7 @@ you will find that, the page request you to enter a password.
 ---
 ---
 
-#the config rul detail
+# the config rul detail
 
 # the base rule
 configs for this plugin in _config.yml are all in encrypt: scope
