@@ -73,7 +73,7 @@ you will find that, the page request you to enter a password.
 ---
 ---
 
-#the config rul detail
+# the config rule detail
 
 # the base rule
 configs for this plugin in _config.yml are all in encrypt: scope
