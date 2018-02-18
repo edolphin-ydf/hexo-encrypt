@@ -102,7 +102,7 @@ function encrypt (conf, data) {
 	const password = conf.password;
 	const ciphertext = CryptoJS.AES.encrypt(data.content, password);
 	const txt = ciphertext.toString();
-	const CryptoJSurl = `${RootUrl}js/crypto-js.js`;
+	const CryptoJSurl = `${ RootUrl }js/crypto-js.js`;
 	data.content = `<script src=${ CryptoJSurl }></script>
 <script>
 function doDecrypt(pwd, onError) {
@@ -113,12 +113,11 @@ function doDecrypt(pwd, onError) {
 		var bytes = CryptoJS.AES.decrypt(txt, pwd);
 		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
 		if(typeof(MathJax) !== undefined){
-			MathJax.Hub.Queue(function() {
-				var all = MathJax.Hub.getAllJax(), i;
-				for (i=0; i < all.length; i += 1) {
-					all[i].SourceElement().parentNode.className += ' has-jax';
-				}
-			});
+			MathJax.Hub.Queue(
+                ["resetEquationNumbers",MathJax.InputJax.TeX],
+                ["PreProcess",MathJax.Hub],
+                ["Reprocess",MathJax.Hub]
+            );
 		}
 	} catch(err) {
 		if(onError) {onError(err);}
@@ -158,5 +157,5 @@ hexo.extend.filter.register('after_post_render', function (data) {
 // Copy the encrypt js file
 hexo.extend.generator.register('encrypt', () => ({
 	'data': () => fs.createReadStream(path.resolve(path.dirname(require.resolve('crypto-js')), 'crypto-js.js')),
-	'path': `${ hexo.base_dir }public/js/crypto-js.js`,
+	'path': 'js/crypto-js.js',
 }));
