@@ -112,13 +112,6 @@ function doDecrypt(pwd, onError) {
 	try {
 		var bytes = CryptoJS.AES.decrypt(txt, pwd);
 		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-		if(typeof(MathJax) !== undefined){
-			MathJax.Hub.Queue(
-                ["resetEquationNumbers",MathJax.InputJax.TeX],
-                ["PreProcess",MathJax.Hub],
-                ["Reprocess",MathJax.Hub]
-            );
-		}
 	} catch(err) {
 		if(onError) {onError(err);}
 			return;
@@ -126,6 +119,13 @@ function doDecrypt(pwd, onError) {
 		document.getElementById("enc_content").innerHTML = plaintext;
 		document.getElementById("enc_content").style.display = "block";
 		document.getElementById("enc_passwd").style.display = "none";
+		if(typeof(MathJax) !== undefined){
+			MathJax.Hub.Queue(
+                ["resetEquationNumbers",MathJax.InputJax.TeX],
+                ["PreProcess",MathJax.Hub],
+                ["Reprocess",MathJax.Hub]
+            );
+		}
 	}
 </script>
 <div id="enc_content" style="display:none">${ txt }</div>
