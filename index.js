@@ -105,28 +105,30 @@ function encrypt (conf, data) {
 	const CryptoJSurl = `${ RootUrl }js/crypto-js.js`;
 	data.content = `<script src=${ CryptoJSurl }></script>
 <script>
-function doDecrypt(pwd, onError) {
-	console.log("in doDecrypt");
-	var txt = document.getElementById("enc_content").innerHTML;
-	var plantext;
+function doDecrypt (pwd, onError) {
+	console.log('in doDecrypt');
+	const txt = document.getElementById('enc_content').innerHTML;
+	let plantext;
 	try {
-		var bytes = CryptoJS.AES.decrypt(txt, pwd);
+		const bytes = CryptoJS.AES.decrypt(txt, pwd);
 		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
 	} catch(err) {
-		if(onError) {onError(err);}
-			return;
+		if(onError) {
+			onError(err);
 		}
-		document.getElementById("enc_content").innerHTML = plaintext;
-		document.getElementById("enc_content").style.display = "block";
-		document.getElementById("enc_passwd").style.display = "none";
-		if(typeof(MathJax) !== undefined){
-			MathJax.Hub.Queue(
-                ["resetEquationNumbers",MathJax.InputJax.TeX],
-                ["PreProcess",MathJax.Hub],
-                ["Reprocess",MathJax.Hub]
-            );
-		}
+		return;
 	}
+	document.getElementById('enc_content').innerHTML = plaintext;
+	document.getElementById('enc_content').style.display = 'block';
+	document.getElementById('enc_passwd').style.display = 'none';
+	if(typeof MathJax !== undefined) {
+		MathJax.Hub.Queue(
+			['resetEquationNumbers', MathJax.InputJax.TeX],
+			['PreProcess', MathJax.Hub],
+			['Reprocess', MathJax.Hub]
+		);
+	}
+}
 </script>
 <div id="enc_content" style="display:none">${ txt }</div>
 <div id="enc_passwd">${ conf.template }</div>`;
