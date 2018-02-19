@@ -121,7 +121,7 @@ function doDecrypt (pwd, onError) {
 	document.getElementById('enc_content').innerHTML = plaintext;
 	document.getElementById('enc_content').style.display = 'block';
 	document.getElementById('enc_passwd').style.display = 'none';
-	if(typeof MathJax !== undefined) {
+	if(typeof MathJax !== 'undefined') {
 		MathJax.Hub.Queue(
 			['resetEquationNumbers', MathJax.InputJax.TeX],
 			['PreProcess', MathJax.Hub],
