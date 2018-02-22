@@ -4,7 +4,7 @@
 /*
  * # the base rule
  * configs for this plugin in _config.yml are all in encrypt: scope
- * eg: 
+ * eg:
  * encrypt:
  * 		pwdfile: xxx
  * 		type: xxx
@@ -33,7 +33,7 @@
  * - or in ![](type://), make the url start with type://
  *
  * the value of type could be `qiniu` or `base64` only
- * 
+ *
  * ## the priority is:
  * ![](type://) > post header > _config.yml
  *
@@ -64,83 +64,100 @@
  *
  */
 
-var CryptoJS = require("crypto-js");
-var hexofs = require('hexo-fs');
-var fs = require('fs');
-var log = require('hexo-log')({
-  debug: false,
-  silent: false
+const CryptoJS = require('crypto-js');
+const fs = require('hexo-fs');
+const path = require('path');
+const log = require('hexo-log')({
+	'debug': false,
+	'silent': false,
 });
 
-var RootUrl = hexo.config.root;
-var ConfGlobal = require('./lib/conf_global')(hexo.config.encrypt, hexo.base_dir);
-var ConfPost = require('./lib/conf_post');
-var ConfUrl = require('./lib/conf_url');
-var imgUrlGenerator = require('./lib/url_gen');
+const RootUrl = hexo.config.root;
+const ConfGlobal = require('./lib/conf_global')(hexo.config.encrypt, hexo.base_dir);
+const ConfPost = require('./lib/conf_post');
+const ConfUrl = require('./lib/conf_url');
+const imgUrlGenerator = require('./lib/url_gen');
 
 
-function replaceImgUrl(conf, data) {
-	var baseUrl = conf.base_url;
+function replaceImgUrl (conf, data) {
+
+	// const baseUrl = conf.base_url;
 
 	data.content = data.content.replace(/<img [^>]*src=['"]([^'"]+)[^>]*>/gi,
-	function (match, url) {
-		var tmpurl = url;
+		function (match, url) {
 
-		var urlConf = ConfUrl.create(conf, url);
+			// const tmpurl = url;
 
-		return match.replace(url, imgUrlGenerator.genUrl(data, urlConf));
-	});
-	log.debug("post pic url replaced");
+			const urlConf = ConfUrl.create(conf, url);
+
+			return match.replace(url, imgUrlGenerator.genUrl(data, urlConf));
+
+		});
+	log.debug('post pic url replaced');
+
 }
 
-function encrypt(conf, data) {
-	var password = conf.password;
-	var ciphertext = CryptoJS.AES.encrypt(data.content, password);
-	var txt = ciphertext.toString();
-	var CryptoJSurl = RootUrl+'js/crypto-js.js';
-	data.content = '<script src=' + CryptoJSurl + '></script>';
-	data.content = data.content + '<script>\n'+
-		'function doDecrypt(pwd, onError) {\n' +
-		'	console.log("in doDecrypt");\n' +
-		'	var txt = document.getElementById("enc_content").innerHTML;\n' +
-		'	var plantext;\n'	+ 
-		'	try {\n' +
-		'	  	var bytes = CryptoJS.AES.decrypt(txt, pwd);\n' +
-		'		plaintext = bytes.toString(CryptoJS.enc.Utf8);\n' +
-		'	} catch(err) {\n'	+
-		'		if(onError) {onError(err);}\n'	+
-		'		return;\n'	+
-		'	}\n'	+
-		'	document.getElementById("enc_content").innerHTML = plaintext;\n' +
-		'	document.getElementById("enc_content").style.display = "block";\n' +
-		'   document.getElementById("enc_passwd").style.display = "none";\n' +
-		'}\n' +
-		'</script>\n';
-	data.content = data.content + '<div id="enc_content" style="display:none">' + txt + '</div>';
-	data.content = data.content + '<div id="enc_passwd">' + conf.template + '</div>';
-	log.info(data.title + " encryped");
+function encrypt (conf, data) {
+
+	const password = conf.password;
+	const ciphertext = CryptoJS.AES.encrypt(data.content, password);
+	const txt = ciphertext.toString();
+	const CryptoJSurl = `${ RootUrl }js/crypto-js.js`;
+	data.content = `<script src=${ CryptoJSurl }></script>
+<script>
+function doDecrypt (pwd, onError) {
+	console.log('in doDecrypt');
+	const txt = document.getElementById('enc_content').innerHTML;
+	let plantext;
+	try {
+		const bytes = CryptoJS.AES.decrypt(txt, pwd);
+		var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+	} catch(err) {
+		if(onError) {
+			onError(err);
+		}
+		return;
+	}
+	document.getElementById('enc_content').innerHTML = plaintext;
+	document.getElementById('enc_content').style.display = 'block';
+	document.getElementById('enc_passwd').style.display = 'none';
+	if(typeof MathJax !== 'undefined') {
+		MathJax.Hub.Queue(
+			['resetEquationNumbers', MathJax.InputJax.TeX],
+			['PreProcess', MathJax.Hub],
+			['Reprocess', MathJax.Hub]
+		);
+	}
+}
+</script>
+<div id="enc_content" style="display:none">${ txt }</div>
+<div id="enc_passwd">${ conf.template }</div>`;
+	log.info(`${ data.title } encryped`);
+
 }
 
-hexo.extend.filter.register('after_post_render', function(data){
-	var confPost = ConfPost.create(ConfGlobal, data);
-	log.debug("replace:" + confPost.replace_img_url);
-	if (confPost.replace_img_url == true) {
+hexo.extend.filter.register('after_post_render', function (data) {
+
+	const confPost = ConfPost.create(ConfGlobal, data);
+	log.debug(`replace:${ confPost.replace_img_url}`);
+	if (confPost.replace_img_url) {
+
 		replaceImgUrl(confPost, data);
+
 	}
 
-	// encrypt the content
-	if (confPost.encrypt == true) {
+	// Encrypt the content
+	if (confPost.encrypt) {
+
 		encrypt(confPost, data);
-	} 
+
+	}
 	return data;
+
 });
 
-
-// copy the encrypt js file
-hexo.extend.filter.register('after_generate', function(){
-	log.info("copy crypto-js.js to public/js/");
-	hexofs.copyFile(hexo.base_dir + 'node_modules/hexo-encrypt/crypto-js.js', 
-			hexo.base_dir + 'public/js/crypto-js.js');
-});
-
-
+// Copy the encrypt js file
+hexo.extend.generator.register('encrypt', () => ({
+	'data': () => fs.createReadStream(path.resolve(path.dirname(require.resolve('crypto-js')), 'crypto-js.js')),
+	'path': 'js/crypto-js.js',
+}));
