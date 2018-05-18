@@ -1,6 +1,6 @@
 {
   "name": "hexo-encrypt",
-  "version": "0.5.3",
+  "version": "0.5.5",
   "author": "edolphin",
   "main": "index.js",
   "dependencies": {
